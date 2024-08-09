@@ -2,7 +2,7 @@ import 'package:shopping_notes/data/categories.dart';
 import 'package:shopping_notes/model/categories.dart';
 import 'package:shopping_notes/model/shopping_item.dart';
 
-final groceryItems = [
+final shoppingNotes = [
   ShoppingItem(
       id: 'a',
       name: 'Milk',
