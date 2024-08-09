@@ -1,15 +1,15 @@
 import 'package:shopping_notes/model/category.dart';
 
 class ShoppingItem {
-  ShoppingItem({
+  const ShoppingItem({
     required this.id,
     required this.name,
     required this.quantity,
     required this.category,
   });
 
-  String id;
-  String name;
-  num quantity;
-  Category category;
+  final String id;
+  final String name;
+  final int quantity;
+  final Category category;
 }

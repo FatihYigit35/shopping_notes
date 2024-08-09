@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_notes/model/categories.dart';
 import 'package:shopping_notes/model/category.dart';
 
 const categories = {
@@ -43,16 +44,3 @@ const categories = {
     color: Color.fromARGB(255, 0, 225, 255),
   ),
 };
-
-enum Categories {
-  vegetables,
-  fruit,
-  meat,
-  dairy,
-  carbs,
-  sweets,
-  spices,
-  convenience,
-  hygiene,
-  other
-}
