@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_notes/model/shopping_item.dart';
 
-class ShoppingListItem extends StatelessWidget {
-  const ShoppingListItem({super.key, required this.item});
+class ShoppingNoteItem extends StatelessWidget {
+  const ShoppingNoteItem({super.key, required this.item});
   final ShoppingItem item;
 
   @override
