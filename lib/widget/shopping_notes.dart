@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_notes/data/dummy_items.dart';
+import 'package:shopping_notes/model/shopping_item.dart';
 import 'package:shopping_notes/widget/new_item.dart';
 import 'package:shopping_notes/widget/shopping_note_item.dart';
 
@@ -11,18 +11,28 @@ class ShoppingNotes extends StatefulWidget {
 }
 
 class _ShoppingNotesState extends State<ShoppingNotes> {
-  void _addItem() {
-    Navigator.of(context).push(
+  final List<ShoppingItem> _shoppingNotes = [];
+
+  void _addItem() async {
+    final newItem = await Navigator.of(context).push<ShoppingItem>(
       MaterialPageRoute(
         builder: (context) => const NewItem(),
       ),
     );
+
+    if (newItem != null) {
+      _addItemToList(newItem);
+    }
+  }
+
+  void _addItemToList(ShoppingItem item) {
+    setState(() {
+      _shoppingNotes.add(item);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final list = shoppingNotes;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Shopping Notes'),
@@ -36,9 +46,9 @@ class _ShoppingNotesState extends State<ShoppingNotes> {
         ],
       ),
       body: ListView.builder(
-        itemCount: list.length,
+        itemCount: _shoppingNotes.length,
         itemBuilder: (context, index) => ShoppingNoteItem(
-          item: list[index],
+          item: _shoppingNotes[index],
         ),
       ),
     );
