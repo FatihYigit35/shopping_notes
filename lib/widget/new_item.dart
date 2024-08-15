@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:shopping_notes/data/categories.dart';
 import 'package:shopping_notes/model/categories.dart';
 import 'package:shopping_notes/model/shopping_item.dart';
 import 'package:uuid/uuid.dart';
+import 'package:http/http.dart' as http;
 
 class NewItem extends StatefulWidget {
   const NewItem({super.key});
@@ -22,18 +25,37 @@ class _NewItemState extends State<NewItem> {
   void _addItem() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+      final url = Uri.https(
+          'fatih-yigit-default-rtdb.europe-west1.firebasedatabase.app',
+          'shopping_notes.json');
 
-      final item = ShoppingItem(
-        id: uuid.v8(),
-        name: _enteredName,
-        quantity: _enteredQuantity,
-        category: _selectedCategory,
+      final response = http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'name': _enteredName,
+          'quantity': _enteredQuantity,
+          'category': _selectedCategory.title,
+        }),
       );
 
-      final logger = Logger();
-      logger.d('Item id: ${item.id}');
+      // final item = ShoppingItem(
+      //   id: uuid.v8(),
+      //   name: _enteredName,
+      //   quantity: _enteredQuantity,
+      //   category: _selectedCategory,
+      // );
 
-      Navigator.of(context).pop(item);
+      // final logger = Logger();
+      // logger.d('Item id: ${item.id}');
+
+      response.whenComplete(
+        () {
+          Navigator.of(context).pop();
+        },
+      );
     }
   }
 
