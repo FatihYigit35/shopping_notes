@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+import 'package:http/http.dart' as http;
 import 'package:shopping_notes/data/categories.dart';
+import 'package:shopping_notes/data/constants.dart';
 import 'package:shopping_notes/model/categories.dart';
 import 'package:shopping_notes/model/shopping_item.dart';
 import 'package:uuid/uuid.dart';
-import 'package:http/http.dart' as http;
 
 class NewItem extends StatefulWidget {
   const NewItem({super.key});
@@ -21,16 +21,18 @@ class _NewItemState extends State<NewItem> {
   var _enteredName = '';
   var _enteredQuantity = 1;
   var _selectedCategory = categories[Categories.other]!;
+  var _isSending = false;
 
-  void _addItem() {
+  void _addItem() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      final url = Uri.https(
-          'fatih-yigit-default-rtdb.europe-west1.firebasedatabase.app',
-          'shopping_notes.json');
 
-      final response = http.post(
-        url,
+      setState(() {
+        _isSending = true;
+      });
+
+      final response = await http.post(
+        firebaseDBUrl,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -41,21 +43,21 @@ class _NewItemState extends State<NewItem> {
         }),
       );
 
-      // final item = ShoppingItem(
-      //   id: uuid.v8(),
-      //   name: _enteredName,
-      //   quantity: _enteredQuantity,
-      //   category: _selectedCategory,
-      // );
+      final Map<String, dynamic> responseData = jsonDecode(response.body);
 
-      // final logger = Logger();
-      // logger.d('Item id: ${item.id}');
+      if (!mounted) {
+        return;
+      }
 
-      response.whenComplete(
-        () {
-          Navigator.of(context).pop();
-        },
-      );
+      final newId = responseData['name'];
+
+      if (newId != null) {
+        Navigator.of(context).pop(ShoppingItem(
+            id: newId,
+            name: _enteredName,
+            quantity: _enteredQuantity,
+            category: _selectedCategory));
+      }
     }
   }
 
@@ -141,7 +143,6 @@ class _NewItemState extends State<NewItem> {
                         setState(() {
                           _selectedCategory = value!;
                         });
-                        // _selectedCategory = value!;
                       },
                     ),
                   )
@@ -152,15 +153,21 @@ class _NewItemState extends State<NewItem> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    onPressed: () {
-                      _formKey.currentState!.reset();
-                    },
+                    onPressed: _isSending
+                        ? null
+                        : () => _formKey.currentState!.reset(),
                     child: const Text('Reset'),
                   ),
                   const SizedBox(width: 10),
                   ElevatedButton(
-                    onPressed: _addItem,
-                    child: const Text('Add Item'),
+                    onPressed: _isSending ? null : _addItem,
+                    child: _isSending
+                        ? const SizedBox(
+                            height: 16,
+                            width: 16,
+                            child: CircularProgressIndicator(),
+                          )
+                        : const Text('Add Item'),
                   ),
                 ],
               )
