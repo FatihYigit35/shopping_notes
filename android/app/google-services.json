@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "422069215753",
+    "firebase_url": "https://fatih-yigit-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "fatih-yigit",
+    "storage_bucket": "fatih-yigit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422069215753:android:fdc5d77d778f387fc9ced8",
+        "android_client_info": {
+          "package_name": "com.example.shopping_notes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422069215753-h8mvnj8qo93eqs8hsu5e3d83u34mqf0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuO5xcQXb031h7AlR77U1XDTFtbWRelBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422069215753-h8mvnj8qo93eqs8hsu5e3d83u34mqf0v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422069215753:android:c3cc1ee406a81164c9ced8",
+        "android_client_info": {
+          "package_name": "com.izmirsoftware.shoppingnotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422069215753-h8mvnj8qo93eqs8hsu5e3d83u34mqf0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuO5xcQXb031h7AlR77U1XDTFtbWRelBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422069215753-h8mvnj8qo93eqs8hsu5e3d83u34mqf0v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

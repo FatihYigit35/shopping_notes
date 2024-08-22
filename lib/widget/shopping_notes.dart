@@ -1,7 +1,13 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:shopping_notes/data/categories.dart';
+import 'package:shopping_notes/data/constants.dart';
+import 'package:shopping_notes/model/category.dart';
 import 'package:shopping_notes/model/shopping_item.dart';
 import 'package:shopping_notes/widget/new_item.dart';
 import 'package:shopping_notes/widget/shopping_note_item.dart';
+import 'package:http/http.dart' as http;
 
 class ShoppingNotes extends StatefulWidget {
   const ShoppingNotes({super.key});
@@ -11,23 +17,66 @@ class ShoppingNotes extends StatefulWidget {
 }
 
 class _ShoppingNotesState extends State<ShoppingNotes> {
-  final List<ShoppingItem> _shoppingNotes = [];
+  List<ShoppingItem> _shoppingNotes = [];
+  var _isLoading = true;
+  String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadItems();
+  }
+
+  void _loadItems() async {
+    final response = await http.get(firebaseDBUrl);
+
+    if (response.statusCode >= 400) {
+      setState(() {
+        _error = 'Something went wrong';
+      });
+    }
+
+    final Map<String, dynamic> listData = jsonDecode(response.body);
+
+    final List<ShoppingItem> loadedNotes = [];
+
+    for (final item in listData.entries) {
+      final Category category = categories.entries
+          .firstWhere(
+              (element) => element.value.title == item.value['category'])
+          .value;
+      final String name = item.value['name'];
+      final int quantity = item.value['quantity'];
+
+      loadedNotes.add(
+        ShoppingItem(
+          id: item.key,
+          name: name,
+          quantity: quantity,
+          category: category,
+        ),
+      );
+
+      setState(() {
+        _shoppingNotes = loadedNotes;
+        _isLoading = false;
+      });
+    }
+  }
 
   void _addItem() async {
-    final newItem = await Navigator.of(context).push<ShoppingItem>(
+    final newItem = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const NewItem(),
       ),
     );
 
-    if (newItem != null) {
-      _addItemToList(newItem);
+    if (newItem == null) {
+      return;
     }
-  }
 
-  void _addItemToList(ShoppingItem item) {
     setState(() {
-      _shoppingNotes.add(item);
+      _shoppingNotes.add(newItem);
     });
   }
 
@@ -62,6 +111,12 @@ class _ShoppingNotesState extends State<ShoppingNotes> {
       ),
     );
 
+    if (_isLoading) {
+      content = const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
     if (_shoppingNotes.isNotEmpty) {
       content = ListView.builder(
         itemCount: _shoppingNotes.length,
@@ -89,6 +144,10 @@ class _ShoppingNotesState extends State<ShoppingNotes> {
           ),
         ),
       );
+    }
+
+    if (_error != null) {
+      content = Center(child: Text(_error!));
     }
 
     return Scaffold(
