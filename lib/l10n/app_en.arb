@@ -7,5 +7,77 @@
   "shoppingNotesTitle": "Your Shopping Notes",
   "@shoppingNotesTitle": {
     "description": "Shopping Notes screen title"
+  },
+  "vegetables": "Vegetables",
+  "@vegetables": {
+    "description": "One of the categories"
+  },
+  "fruit": "Fruit",
+  "@fruit": {
+    "description": "One of the categories"
+  },
+  "meat": "Meat",
+  "@meat": {
+    "description": "One of the categories"
+  },
+  "dairy": "Dairy",
+  "@dairy": {
+    "description": "One of the categories"
+  },
+  "carbs": "Carbs",
+  "@carbs": {
+    "description": "One of the categories"
+  },
+  "sweets": "Sweets",
+  "@sweets": {
+    "description": "One of the categories"
+  },
+  "spices": "Spices",
+  "@spices": {
+    "description": "One of the categories"
+  },
+  "convenience": "Convenience",
+  "@convenience": {
+    "description": "One of the categories"
+  },
+  "hygiene": "Hygiene",
+  "@hygiene": {
+    "description": "One of the categories"
+  },
+  "other": "Other",
+  "@other": {
+    "description": "One of the categories"
+  },
+  "addNewItemScreenTitle": "Add a new shopping note",
+  "@addNewItemScreenTitle": {
+    "description": "Add new item screen title text"
+  },
+  "name": "Name",
+  "@name": {
+    "description": "Add new item screen name text"
+  },
+  "quantity": "Quantity",
+  "@quantity": {
+    "description": "Add new item screen quantity text"
+  },
+  "category": "Category",
+  "@category": {
+    "description": "Add new item screen category text"
+  },
+  "reset": "Reset",
+  "@reset": {
+    "description": "Add new item screen reset text"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Add new item screen save text"
+  },
+  "pleaseEnterSomeText": "Please enter some text",
+  "@pleaseEnterSomeText": {
+    "description": "Error message: Please enter some text"
+  },
+  "noItemsAddedYet": "No shopping note added yet",
+  "@noItemsAddedYet": {
+    "description": "Error message: No shopping note added yet"
   }
 }

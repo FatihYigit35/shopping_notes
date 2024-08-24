@@ -1,5 +1,23 @@
 {
     "@@locale": "tr",
     "appName": "Alışveriş Notları",
-    "shoppingNotesTitle": "Alışveriş Notlarınız"
+    "shoppingNotesTitle": "Alışveriş Notlarınız",
+    "vegetables": "Sebzeler",
+    "fruit": "Meyve",
+    "meat": "Et",
+    "dairy": "Süt Ürünleri",
+    "carbs": "Karbonhidratlar",
+    "sweets": "Tatlılar",
+    "spices": "Baharatlar",
+    "convenience": "Kolaylık",
+    "hygiene": "Hijyen",
+    "other": "Diğer",
+    "addNewItemScreenTitle": "Yeni alışveriş notu ekle",
+    "name": "İsim",
+    "quantity": "Miktar",
+    "category": "Kategori",
+    "reset": "Sıfırla",
+    "save": "Kaydet",
+    "pleaseEnterSomeText": "Lütfen bir metin girin",
+    "noItemsAddedYet": "Henüz alışveriş notu eklenmemiş"
 }
