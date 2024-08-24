@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "appName": "Shopping Notes",
+  "@appName": {
+    "description": "App name"
+  },
+  "shoppingNotesTitle": "Your Shopping Notes",
+  "@shoppingNotesTitle": {
+    "description": "Shopping Notes screen title"
+  }
+}
