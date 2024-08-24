@@ -1,46 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_notes/data/i18n.dart';
 import 'package:shopping_notes/model/categories.dart';
 import 'package:shopping_notes/model/category.dart';
 
-const categories = {
+final categories = {
   Categories.vegetables: Category(
-    'Vegetables',
-    color: Color.fromARGB(255, 0, 255, 128),
+    appLocalizations.vegetables,
+    color: Colors.green,
   ),
   Categories.fruit: Category(
-    'Fruit',
-    color: Color.fromARGB(255, 145, 255, 0),
+    appLocalizations.fruit,
+    color: Colors.lime,
   ),
   Categories.meat: Category(
-    'Meat',
-    color: Color.fromARGB(255, 255, 102, 0),
+    appLocalizations.meat,
+    color: Colors.red,
   ),
   Categories.dairy: Category(
-    'Dairy',
-    color: Color.fromARGB(255, 0, 208, 255),
+    appLocalizations.dairy,
+    color: Colors.cyan,
   ),
   Categories.carbs: Category(
-    'Carbs',
-    color: Color.fromARGB(255, 0, 60, 255),
+    appLocalizations.carbs,
+    color: Colors.indigo,
   ),
   Categories.sweets: Category(
-    'Sweets',
-    color: Color.fromARGB(255, 255, 149, 0),
+    appLocalizations.sweets,
+    color: Colors.orange,
   ),
   Categories.spices: Category(
-    'Spices',
-    color: Color.fromARGB(255, 255, 187, 0),
+    appLocalizations.spices,
+    color: Colors.yellow,
   ),
   Categories.convenience: Category(
-    'Convenience',
-    color: Color.fromARGB(255, 191, 0, 255),
+    appLocalizations.convenience,
+    color: Colors.deepPurple,
   ),
   Categories.hygiene: Category(
-    'Hygiene',
-    color: Color.fromARGB(255, 149, 0, 255),
+    appLocalizations.hygiene,
+    color: Colors.purple,
   ),
   Categories.other: Category(
-    'Other',
-    color: Color.fromARGB(255, 0, 225, 255),
+    appLocalizations.other,
+    color: Colors.grey,
   ),
 };
