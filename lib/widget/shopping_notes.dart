@@ -9,6 +9,7 @@ import 'package:shopping_notes/model/request_method.dart';
 import 'package:shopping_notes/model/shopping_item.dart';
 import 'package:shopping_notes/widget/new_item.dart';
 import 'package:shopping_notes/widget/shopping_note_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ShoppingNotes extends StatefulWidget {
   const ShoppingNotes({super.key});
@@ -177,7 +178,7 @@ class _ShoppingNotesState extends State<ShoppingNotes> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Shopping Notes'),
+        title: Text(AppLocalizations.of(context)!.shoppingNotesTitle),
         actions: [
           IconButton(
             onPressed: _addItem,
