@@ -49,7 +49,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '422069215753',
     projectId: 'fatih-yigit',
     authDomain: 'fatih-yigit.firebaseapp.com',
-    databaseURL: 'https://fatih-yigit-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL:
+        'https://fatih-yigit-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'fatih-yigit.appspot.com',
     measurementId: 'G-8XBDWL09M5',
   );
@@ -59,7 +60,8 @@ class DefaultFirebaseOptions {
     appId: '1:422069215753:android:fdc5d77d778f387fc9ced8',
     messagingSenderId: '422069215753',
     projectId: 'fatih-yigit',
-    databaseURL: 'https://fatih-yigit-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL:
+        'https://fatih-yigit-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'fatih-yigit.appspot.com',
   );
 
@@ -68,9 +70,10 @@ class DefaultFirebaseOptions {
     appId: '1:422069215753:ios:12333cb69ad34325c9ced8',
     messagingSenderId: '422069215753',
     projectId: 'fatih-yigit',
-    databaseURL: 'https://fatih-yigit-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL:
+        'https://fatih-yigit-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'fatih-yigit.appspot.com',
-    iosBundleId: 'com.example.shoppingNotes',
+    iosBundleId: 'com.izmirsoftware.shoppingNotes',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -78,9 +81,9 @@ class DefaultFirebaseOptions {
     appId: '1:422069215753:ios:12333cb69ad34325c9ced8',
     messagingSenderId: '422069215753',
     projectId: 'fatih-yigit',
-    databaseURL: 'https://fatih-yigit-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL:
+        'https://fatih-yigit-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'fatih-yigit.appspot.com',
-    iosBundleId: 'com.example.shoppingNotes',
+    iosBundleId: 'com.izmirsoftware.shoppingNotes',
   );
-
 }
