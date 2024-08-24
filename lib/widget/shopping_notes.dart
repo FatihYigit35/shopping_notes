@@ -1,13 +1,14 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+import 'package:http/http.dart' as http;
 import 'package:shopping_notes/data/categories.dart';
 import 'package:shopping_notes/data/constants.dart';
 import 'package:shopping_notes/model/category.dart';
+import 'package:shopping_notes/model/request_method.dart';
 import 'package:shopping_notes/model/shopping_item.dart';
 import 'package:shopping_notes/widget/new_item.dart';
 import 'package:shopping_notes/widget/shopping_note_item.dart';
-import 'package:http/http.dart' as http;
 
 class ShoppingNotes extends StatefulWidget {
   const ShoppingNotes({super.key});
@@ -28,7 +29,7 @@ class _ShoppingNotesState extends State<ShoppingNotes> {
   }
 
   void _loadItems() async {
-    final response = await http.get(firebaseDBUrl);
+    final response = await http.get(getFirebaseDBUri(RequestMethod.get));
 
     if (response.statusCode >= 400) {
       setState(() {
@@ -36,32 +37,34 @@ class _ShoppingNotesState extends State<ShoppingNotes> {
       });
     }
 
-    final Map<String, dynamic> listData = jsonDecode(response.body);
+    final Map<String, dynamic>? listData = jsonDecode(response.body);
 
     final List<ShoppingItem> loadedNotes = [];
 
-    for (final item in listData.entries) {
-      final Category category = categories.entries
-          .firstWhere(
-              (element) => element.value.title == item.value['category'])
-          .value;
-      final String name = item.value['name'];
-      final int quantity = item.value['quantity'];
+    if (listData != null) {
+      for (final item in listData.entries) {
+        final Category category = categories.entries
+            .firstWhere(
+                (element) => element.value.title == item.value['category'])
+            .value;
+        final String name = item.value['name'];
+        final int quantity = item.value['quantity'];
 
-      loadedNotes.add(
-        ShoppingItem(
-          id: item.key,
-          name: name,
-          quantity: quantity,
-          category: category,
-        ),
-      );
-
-      setState(() {
-        _shoppingNotes = loadedNotes;
-        _isLoading = false;
-      });
+        loadedNotes.add(
+          ShoppingItem(
+            id: item.key,
+            name: name,
+            quantity: quantity,
+            category: category,
+          ),
+        );
+      }
     }
+
+    setState(() {
+      _shoppingNotes = loadedNotes;
+      _isLoading = false;
+    });
   }
 
   void _addItem() async {
@@ -80,27 +83,49 @@ class _ShoppingNotesState extends State<ShoppingNotes> {
     });
   }
 
-  void _removeItemFromList(ShoppingItem item) {
-    final index = _shoppingNotes.indexOf(item);
+  void _removeItemFromList(ShoppingItem item) async {
+    //final index = _shoppingNotes.indexOf(item);
 
-    setState(() {
-      _shoppingNotes.remove(item);
-    });
-
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        duration: const Duration(seconds: 3),
-        content: const Text('Shopping note deleted.'),
-        action: SnackBarAction(
-            label: 'Undo',
-            onPressed: () {
-              setState(() {
-                _shoppingNotes.insert(index, item);
-              });
-            }),
-      ),
+    final response = await http.delete(
+      getFirebaseDBUri(RequestMethod.delete, id: item.id),
     );
+
+    if (!mounted) {
+      return;
+    }
+
+    if (response.statusCode == 200) {
+      setState(() {
+        _shoppingNotes.remove(item);
+      });
+
+      showSnackbar(
+        context,
+        message: 'Shopping note deleted.',
+      );
+    }
+
+    if (response.statusCode >= 400) {
+      showSnackbar(
+        context,
+        message: 'An error occurred while deleting, try again.',
+      );
+    }
+
+    // ScaffoldMessenger.of(context).clearSnackBars();
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   SnackBar(
+    //     duration: const Duration(seconds: 3),
+    //     content: const Text('Shopping note deleted.'),
+    //     action: SnackBarAction(
+    //         label: 'Undo',
+    //         onPressed: () {
+    //           setState(() {
+    //             _shoppingNotes.insert(index, item);
+    //           });
+    //         }),
+    //   ),
+    // );
   }
 
   @override

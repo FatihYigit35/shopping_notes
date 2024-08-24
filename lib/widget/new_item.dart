@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:shopping_notes/data/categories.dart';
 import 'package:shopping_notes/data/constants.dart';
 import 'package:shopping_notes/model/categories.dart';
+import 'package:shopping_notes/model/request_method.dart';
 import 'package:shopping_notes/model/shopping_item.dart';
 import 'package:uuid/uuid.dart';
 
@@ -32,7 +33,7 @@ class _NewItemState extends State<NewItem> {
       });
 
       final response = await http.post(
-        firebaseDBUrl,
+        getFirebaseDBUri(RequestMethod.post),
         headers: {
           'Content-Type': 'application/json',
         },

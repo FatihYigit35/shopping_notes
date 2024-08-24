@@ -1,4 +1,4 @@
-package com.example.shopping_notes
+package com.izmirsoftware.shopping_notes
 
 import io.flutter.embedding.android.FlutterActivity
 
