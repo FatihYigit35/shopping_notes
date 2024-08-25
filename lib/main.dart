@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shopping_notes/data/i18n.dart';
+import 'package:shopping_notes/l10n/i18n.dart';
 import 'package:shopping_notes/widget/shopping_notes.dart';
 
 void main() {

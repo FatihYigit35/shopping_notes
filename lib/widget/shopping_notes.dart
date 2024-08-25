@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopping_notes/data/categories.dart';
 import 'package:shopping_notes/data/constants.dart';
-import 'package:shopping_notes/data/i18n.dart';
+import 'package:shopping_notes/l10n/i18n.dart';
 import 'package:shopping_notes/model/category.dart';
 import 'package:shopping_notes/model/request_method.dart';
 import 'package:shopping_notes/model/shopping_item.dart';

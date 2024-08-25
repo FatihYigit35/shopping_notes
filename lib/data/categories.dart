@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_notes/data/i18n.dart';
+import 'package:shopping_notes/l10n/i18n.dart';
 import 'package:shopping_notes/model/categories.dart';
 import 'package:shopping_notes/model/category.dart';
 
