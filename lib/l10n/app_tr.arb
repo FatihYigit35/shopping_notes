@@ -19,5 +19,9 @@
     "reset": "Sıfırla",
     "save": "Kaydet",
     "pleaseEnterSomeText": "Lütfen bir metin girin",
-    "noItemsAddedYet": "Henüz alışveriş notu eklenmemiş"
+    "noItemsAddedYet": "Henüz alışveriş notu eklenmemiş",
+    "failedToFetchData": "Veriler alınamadı, lütfen tekrar deneyin.",
+    "somethingWentWrong": "Bir sorun oluştu, lütfen tekrar deneyin.",
+    "shoppingNoteDeleted": "Alışveriş notu silindi.",
+    "anErrorOccurredWhileDeleting": "Silinirken bir hata oluştu, tekrar deneyin."
 }

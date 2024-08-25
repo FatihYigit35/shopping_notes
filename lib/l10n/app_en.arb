@@ -79,5 +79,21 @@
   "noItemsAddedYet": "No shopping note added yet",
   "@noItemsAddedYet": {
     "description": "Error message: No shopping note added yet"
+  },
+  "failedToFetchData": "Failed to fetch data, please try again.",
+  "@failedToFetchData": {
+    "description": "Error message: Failed to fetch data, please try again."
+  },
+  "somethingWentWrong": "Something went wrong, please try again.",
+  "@somethingWentWrong": {
+    "description": "Error message: Something went wrong, please try again."
+  },
+  "shoppingNoteDeleted": "Shopping note deleted.",
+  "@shoppingNoteDeleted": {
+    "description": "Error message: Shopping note deleted."
+  },
+  "anErrorOccurredWhileDeleting": "An error occurred while deleting, try again.",
+  "@anErrorOccurredWhileDeleting": {
+    "description": "Error message: An error occurred while deleting, try again."
   }
 }

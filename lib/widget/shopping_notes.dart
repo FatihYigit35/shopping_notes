@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopping_notes/data/categories.dart';
 import 'package:shopping_notes/data/constants.dart';
-import 'package:shopping_notes/data/i18n.dart';
+import 'package:shopping_notes/l10n/i18n.dart';
 import 'package:shopping_notes/model/category.dart';
 import 'package:shopping_notes/model/request_method.dart';
 import 'package:shopping_notes/model/shopping_item.dart';
@@ -30,46 +30,52 @@ class _ShoppingNotesState extends State<ShoppingNotes> {
   }
 
   void _loadItems() async {
-    final response = await http.get(getFirebaseDBUri(RequestMethod.get));
+    try {
+      final response = await http.get(getFirebaseDBUri(RequestMethod.get));
 
-    if (response.statusCode >= 400) {
+      if (response.statusCode >= 400) {
+        setState(() {
+          _error = appLocalizations.failedToFetchData;
+        });
+      }
+
+      final Map<String, dynamic>? listData = jsonDecode(response.body);
+
+      final List<ShoppingItem> loadedNotes = [];
+
+      if (!mounted) {
+        return;
+      }
+
+      if (listData != null) {
+        for (final item in listData.entries) {
+          final Category category = categories.entries
+              .firstWhere(
+                  (element) => element.value.title == item.value['category'])
+              .value;
+          final String name = item.value['name'];
+          final int quantity = item.value['quantity'];
+
+          loadedNotes.add(
+            ShoppingItem(
+              id: item.key,
+              name: name,
+              quantity: quantity,
+              category: category,
+            ),
+          );
+        }
+      }
+
       setState(() {
-        _error = 'Something went wrong';
+        _shoppingNotes = loadedNotes;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = appLocalizations.somethingWentWrong;
       });
     }
-
-    final Map<String, dynamic>? listData = jsonDecode(response.body);
-
-    final List<ShoppingItem> loadedNotes = [];
-
-    if (!mounted) {
-      return;
-    }
-
-    if (listData != null) {
-      for (final item in listData.entries) {
-        final Category category = categories.entries
-            .firstWhere(
-                (element) => element.value.title == item.value['category'])
-            .value;
-        final String name = item.value['name'];
-        final int quantity = item.value['quantity'];
-
-        loadedNotes.add(
-          ShoppingItem(
-            id: item.key,
-            name: name,
-            quantity: quantity,
-            category: category,
-          ),
-        );
-      }
-    }
-
-    setState(() {
-      _shoppingNotes = loadedNotes;
-      _isLoading = false;
-    });
   }
 
   void _addItem() async {
@@ -89,8 +95,6 @@ class _ShoppingNotesState extends State<ShoppingNotes> {
   }
 
   void _removeItemFromList(ShoppingItem item) async {
-    //final index = _shoppingNotes.indexOf(item);
-
     final response = await http.delete(
       getFirebaseDBUri(RequestMethod.delete, id: item.id),
     );
@@ -106,31 +110,16 @@ class _ShoppingNotesState extends State<ShoppingNotes> {
 
       showSnackbar(
         context,
-        message: 'Shopping note deleted.',
+        message: appLocalizations.shoppingNoteDeleted,
       );
     }
 
     if (response.statusCode >= 400) {
       showSnackbar(
         context,
-        message: 'An error occurred while deleting, try again.',
+        message: appLocalizations.anErrorOccurredWhileDeleting,
       );
     }
-
-    // ScaffoldMessenger.of(context).clearSnackBars();
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   SnackBar(
-    //     duration: const Duration(seconds: 3),
-    //     content: const Text('Shopping note deleted.'),
-    //     action: SnackBarAction(
-    //         label: 'Undo',
-    //         onPressed: () {
-    //           setState(() {
-    //             _shoppingNotes.insert(index, item);
-    //           });
-    //         }),
-    //   ),
-    // );
   }
 
   @override
