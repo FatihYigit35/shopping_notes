@@ -9,6 +9,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  final seedColor = const Color.fromARGB(255, 139, 195, 74);
 
   // This widget is the root of your application.
   @override
@@ -16,13 +17,20 @@ class MyApp extends StatelessWidget {
     AppTranslations.init(context);
 
     return MaterialApp(
-      theme: ThemeData.dark().copyWith(
+      theme: ThemeData.light().copyWith(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 139, 195, 74),
-          brightness: Brightness.dark,
-          surface: const Color.fromARGB(255, 42, 51, 59),
+          seedColor: seedColor,
+          brightness: Brightness.light,
+          surface: Colors.lightBlueAccent[100],
         ),
-        scaffoldBackgroundColor: const Color.fromARGB(255, 50, 58, 60),
+        scaffoldBackgroundColor: Colors.grey[100],
+      ),
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: seedColor,
+            brightness: Brightness.dark,
+            surface: Colors.blueGrey[850]),
+        scaffoldBackgroundColor: Colors.grey[850],
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
